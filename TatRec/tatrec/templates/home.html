@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>TatRec - Don't be a Dink, Get the Right Ink</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="TatRec - Tattoo Recommendation Engine">
+	<meta name="keywords" content="tattoo, recommendation, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="../static/img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="../static/css/magnific-popup.css"/>
+	<link rel="stylesheet" href="../static/css/style.css"/>
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+	{% for message in messages %}
+	    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+		<span>{{ message }}</span>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	    </div>
+	{% endfor %}
+    {% endif %}
+{% endwith %}
+
+	<!-- header section start -->
+	<header class="header-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4 col-md-3">
+					<div class="logo">
+						<h1 class="site-logo">TatRec</h1>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-9">
+					<a href="mailto:jeffspencerd@gmail.com" class="site-btn header-btn">Get in touch</a>
+					<nav class="main-menu">
+						<ul>
+							<li><a href="{{ url_for('home') }}">Home</a></li>
+							<li><a href="{{ url_for('about') }}">About</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div class="nav-switch">
+			<i class="fa fa-bars"></i>
+		</div>
+	</header>
+	<!-- header section end -->
+
+
+	<!-- image upload section start -->
+	<section class="image-section pt100">
+	<div class="container">
+		<div class="input-class">
+		<h5>Input a tattoo or select one in the drop-down then hit Get Recs:</h5>
+		</div>
+	    <form method="post" enctype="multipart/form-data" id="tatform" action="recommendations">
+		<input class="btn btn-warning" id="img" name="file" type="file" accept=".jpeg,.jpg"/>
+		<input class="btn btn-danger" type="submit" value="Get Recs"/>
+	<div>
+	<select name="tatlist">
+		<option value="">--Tattoo will show up below after pressing Get Recs--</option>
+		<option value="dog">Dog</option>
+		<option value="tiger">Tiger</option>
+		<option value="heart">Heart</option>
+		<option value="kingkong">King Kong</option>
+		<option value="rose">Rose</option>
+		<option value="flower">Flower</option>
+		<option value="clock">Clock</option>
+		<option value="angel">Angel</option>
+	</select>
+	</div>
+	    </form>
+	    <div class="info-area">
+		<div class="img-area"></div>
+		<div class="status-area">
+		    <span class="status"></span>
+		</div>
+	    </div>
+		    <img src={{img_upload}} alt="Input Tatoo" height="400" hspace="50" vspace="20"/>
+	</div>
+	</section>
+
+	<!-- image upload section end -->
+
+
+	<!-- portfolio section start -->
+	<section class="portfolio-section">
+		<div class="container-fluid">
+						<ul class="portfolio-filter controls">
+							<li class="control" data-filter="all">All</li>
+							<li class="control" data-filter=".traditional">Traditional</li>
+							<li class="control" data-filter=".chicano">Chicano</li>
+							<li class="control" data-filter=".realism">Realism</li>
+							<li class="control" data-filter=".watercolor">Water Color</li>
+							<li class="control" data-filter=".tribal">Tribal</li>
+						</ul>
+		</div>
+		<div class="container-fluid p-0">
+			<div class="row portfolios-area">
+				<div class="mix col-md-5 col-lg-3 digital">
+					<a href={{img_rec1}} class="portfolio-item pi-style2 set-bg " data-setbg={{img_rec1}}>
+						<div class="pi-inner">
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
+					</a>
+					<div class="portfolio-meta">
+						<a href={{"https://www.instagram.com/" ~ user_rec1}} target="_blank">{{"@" ~ user_rec1}}</a>
+						<p>Followers: {{fols_rec1}}  Likes: {{likes_rec1}}</p>
+					</div>
+				</div>
+				<div class="mix col-md-5 col-lg-3 web">
+					<a href={{img_rec2}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec2}}>
+						<div class="pi-inner">
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
+					</a>
+					<div class="portfolio-meta">
+						<a href={{"https://www.instagram.com/" ~ user_rec2}} target="_blank">{{"@" ~ user_rec2}}</a>
+						<p>Followers: {{fols_rec2}}  Likes: {{likes_rec2}}</p>
+					</div>
+				</div>
+				<div class="mix col-md-5 col-lg-3 rened">
+					<a href={{img_rec3}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec3}}>
+						<div class="pi-inner">
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
+					</a>
+					<div class="portfolio-meta">
+						<a href={{"https://www.instagram.com/" ~ user_rec3}} target="_blank">{{"@" ~ user_rec3}}</a>
+						<p>Followers: {{fols_rec3}}  Likes: {{likes_rec3}}</p>
+					</div>
+				</div>
+				<div class="mix col-md-5 col-lg-3 digital">
+					<a href={{img_rec4}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec4}}>
+						<div class="pi-inner">
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
+					</a>
+					<div class="portfolio-meta">
+						<a href={{"https://www.instagram.com/" ~ user_rec4}} target="_blank">{{"@" ~ user_rec4}}</a>
+						<p>Followers: {{fols_rec4}}  Likes: {{likes_rec4}}</p>
+					</div>
+				</div>
+				<div class="mix col-md-5 col-lg-3 rened">
+					<a href={{img_rec5}} class="portfolio-item pi-style2 set-bg" data-setbg={{img_rec5}}>
+						<div class="pi-inner">
+							<h2>+ Enlarge tattoo image</h2>
+						</div>
+					</a>
+					<div class="portfolio-meta">
+						<a href={{"https://www.instagram.com/" ~ user_rec5}} target="_blank">{{"@" ~ user_rec5}}</a>
+						<p>Followers: {{fols_rec5}}  Likes: {{likes_rec5}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- portfolio section end -->
+
+
+	<!-- footer section start -->
+	<footer class="footer-section text-center">
+		<div class="container">
+			<a href="mailto:jeffspencerd@gmail.com" class="site-btn">Get in touch</a>
+			<div class="social-links">
+				<a href="https://www.linkedin.com/in/jdspen/"><span class="fa fa-linkedin"></span></a>
+				<a href="https://github.com/JSpenced/"><span class="fa fa-github"></span></a>
+			</div>
+			<div class="copyright">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+</div>
+		</div>
+	</footer>
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="../static/js/jquery-2.1.4.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/mixitup.min.js"></script>
+	<script src="../static/js/magnific-popup.min.js"></script>
+	<script src="../static/js/main.js"></script>
+</body>
+</html>
